@@ -1,0 +1,22 @@
+.mainGrid {
+    background-image: url(../../assets/backgrounds/map-of-the-world-2401458_1920.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.punchline{
+    font-size: 45px;
+    line-height: 48px;
+    font-weight: 900;
+    color: aliceblue;
+    border-bottom: 1px solid aliceblue;
+    padding-bottom: .3em;
+}
+
+.tagline{
+
+    color: aliceblue;
+    font-size: 18px;
+    line-height: 20px;
+    padding-top: 1em;
+}
