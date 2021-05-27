@@ -1,0 +1,22 @@
+/* the sty sheet for login & stuff */
+
+.mainNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.nav{
+
+    display: inline-flex;
+    padding-top: .4em;
+
+    
+}
+
+.nav a{
+    font-size: 16px;
+    font-weight: 600;
+
+}
