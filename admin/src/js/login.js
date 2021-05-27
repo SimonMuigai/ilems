@@ -9,6 +9,8 @@ $('#adminLoginForm').submit((e) => {
 
         let res = JSON.parse(data);
 
+        console.log(res);
+
         if (res.login == true) {
 
             alert('Login Successfull');

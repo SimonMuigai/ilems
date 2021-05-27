@@ -1,0 +1,210 @@
+<div class="ui centered grid" style="background: rgb(80, 54, 80);height: 110vh;">
+    <div class="re sixteen wide column">
+
+    </div>
+    <div class="yello sixteen wide column" style="height: 4vh;">
+
+    </div>
+    <div class="brow six wide column">
+        <div class="ui segment" style="max-width: 90%;margin: auto;">
+            <div class="mainComponent ui grid">
+
+                <div class="sixteen wide column" style="text-align: center;padding-top: 2em;">
+
+                    <h3> <i class="polices icon"></i> police REGISTRATION</h3>
+                </div>
+                <div class="sixteen wide column">
+                    <form class="ui form" id="registrationForm">
+
+
+                        <div class="two fields">
+                            <div class="field">
+                                <label>First name</label>
+                                <input type="text" name="fname" id="fname" required
+                                    style="line-height:2em;background: rgb(226, 226, 226);border-radius: 5px;">
+                            </div>
+
+                            <div class="field">
+                                <label>Last Name</label>
+
+                                <input type="text" name="lname" id="lname" required
+                                    style="line-height:2em;background: rgb(226, 226, 226);border-radius: 5px;">
+                            </div>
+                        </div>
+
+
+                        <div class="two fields">
+
+                            <div class="field">
+                                <label>Email</label>
+                                <input type="text" name="email" id="email" placeholder="abc@example.com" required
+                                    style="line-height:2em;background: rgb(226, 226, 226);border-radius: 5px;">
+                            </div>
+
+
+                            <div class="field">
+                                <label>Phone</label>
+                                <input type="tel" name="phone" id="phone" placeholder="0700000000/0100000000" required
+                                    style="line-height:2em;background: rgb(226, 226, 226);border-radius: 5px;">
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="two fields">
+                            <div class="field">
+                                <label>
+                                    Town
+                                </label>
+                                <input type="tel" name="town" id="town" placeholder="Nakuru Kenya" required
+                                    style="line-height:2em;background: rgb(226, 226, 226);border-radius: 5px;">
+                            </div>
+
+                            <div class="field">
+                                <label>
+                                    Postal Address
+                                </label>
+                                <input type="text" name="postalAddress" id="postalAddress" required
+                                    placeholder="202092-20187 Nakuru"
+                                    style="line-height:2em;background: rgb(226, 226, 226);border-radius: 5px;">
+                            </div>
+                        </div>
+
+
+                        <div class="two fields">
+                            <div class="field">
+                                <label>
+                                    D.O.B
+                                </label>
+                                <input type="date" name="dob" id="dob" placeholder="2000-00-00" required
+                                    style="line-height:2em;background: rgb(226, 226, 226);border-radius: 5px;">
+                            </div>
+
+                            <div class="field">
+                                <label>
+                                    ID No
+                                </label>
+                                <input type="text" name="idNo" id="idNo" required placeholder="12345678"
+                                    style="line-height:2em;background: rgb(226, 226, 226);border-radius: 5px;">
+                            </div>
+                        </div>
+
+
+
+                        <div class="two fields">
+                            <div class="field">
+                                <label>
+                                    Password
+                                </label>
+                                <input type="password" name="password" id="password" placeholder="password" required
+                                    style="line-height:2em;background: rgb(226, 226, 226);border-radius: 5px;">
+                            </div>
+
+                            <div class="field">
+                                <label>
+                                    Confirm Password
+                                </label>
+                                <input type="password" name="confirmPassword" id="confirmPassword"
+                                    placeholder="confirmPassword" required
+                                    style="line-height:2em;background: rgb(226, 226, 226);border-radius: 5px;">
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="field" style="padding-top: 2em;text-align: center;">
+                            <button class="policeRegStbBtn ui basic purple  button">
+                                <i class="edit icon"></i> Register
+                            </button>
+                        </div>
+
+
+                        <div class="three fields">
+                            <div class="field" style="padding-top: 1em;text-align: center;">
+                                <b>
+                                    <a href="../" style="color: rgb(66, 14, 66);"> <i class="home icon"></i> Home </a>
+                                </b>
+                            </div>
+
+                            <div class="field" style="padding-top: 1em;text-align: center;">
+                                <b>
+                                    <a href="forgot" style="color: rgb(66, 14, 66);">Forgot Password ?</a>
+                                </b>
+                            </div>
+
+                            <div class="field" style="padding-top: 1em;text-align: center;">
+                                <b>
+                                    <a href="login" style="color: rgb(66, 14, 66);">Have An Account? Login</a>
+                                </b>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="yello sixteen wide column" style="height: 10vh;">
+
+    </div>
+</div>
+
+<script>
+
+    document.title = "police | Register";
+
+    // when registration form is submitted 
+    $('#registrationForm').submit((e) => {
+
+        e.preventDefault();
+
+
+        if ($('#password').val() != $('#confirmPassword').val()) {
+
+            alert('Passwords Dont Match');
+        } else {
+
+
+            let police = $('#registrationForm').serialize();
+
+            $('.policeRegStbBtn').addClass('loading');
+
+            $.post('server/register.php', police, (data) => {
+
+                // alert(data);
+
+                $('.policeRegStbBtn').removeClass('loading');
+
+
+                $('#registrationForm').trigger('reset');
+
+                let res = JSON.parse(data);
+
+                console.log(data);
+
+                if (res.success == 'success') {
+
+                    window.sessionStorage.ilemsliu = res.policeId;
+
+                    alert(res.message);
+
+                    window.location.href = "login";
+
+                } else {
+
+                    alert(res.message);
+                }
+
+
+                window.location.reload();
+
+            })
+        }
+
+    })
+</script>

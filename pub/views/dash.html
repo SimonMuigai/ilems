@@ -1,0 +1,255 @@
+<style>
+    /* the sty sheet for login & stuff */
+
+    .mainNav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .nav {
+
+        display: inline-flex;
+        padding-top: .4em;
+
+
+    }
+
+    .nav a {
+        font-size: 16px;
+        font-weight: 600;
+
+    }
+</style>
+
+<div class="ui centered grid" style="max-width: 90em;margin: auto;">
+
+
+    <div class="blu sixteen wide column" style="height: 4em;background: rgb(43, 114, 194);">
+
+        <div class=" mainNav">
+            <div class="nav">
+                <a href="" style="color: aliceblue;">
+                    <i class="home icon"></i> Home
+                </a>
+            </div>
+
+            <div class="nav">
+                <a href="my-cases" style="color: aliceblue;">
+                    <i class="file icon"></i> My Cases
+                </a>
+            </div>
+
+            <div class="nav">
+                <a href="case-studies" style="color: aliceblue;">
+                    <i class="book icon"></i> Case Studies
+                </a>
+            </div>
+
+            <div class="nav">
+                <a href="reports" style="color: aliceblue;">
+                    <i class="bar chart icon"></i> Reports
+                </a>
+            </div>
+
+
+            <div class="nav">
+                <a href="settings" style="color: aliceblue;">
+                    <i class="cogs icon"></i> Settings
+                </a>
+            </div>
+
+
+
+            <div class="nav">
+                <a href="" style="color: aliceblue;">
+                    <i class="user icon"></i> Howdy <span class="pname"></span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="mainDashCol re twelve wide column"
+        style="margin-top: 1em;background: #f2f2f2;border-right: 1px solid rgb(170, 170, 170);">
+
+
+    </div>
+
+    <div class="re four wide column" style="margin-top: 1em;background: #f2f2f2">
+        <div class="profileContainer">
+            <div class="avator"
+                style="width: 10em;height: 10em;margin: auto;background: rgba(0, 0, 255, 0);border-radius: 50%;overflow: hidden;">
+                <img src="../assets/images/51f6fb256629fc755b8870c801092942.png" alt="avator" width="100%"
+                    height="100%">
+            </div>
+
+            <div class="" style="padding: 1em;">
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Name: <span class="pname">
+
+                    </span>
+                </div>
+
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Phone: <span class="pphone">
+
+                    </span>
+                </div>
+
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Email: <span class="pemail">
+
+                    </span>
+                </div>
+
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Town: <span class="ptown">
+
+                    </span>
+                </div>
+
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    D.O.B: <span class="pdob">
+
+                    </span>
+                </div>
+
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Id No: <span class="pidNo">
+
+                    </span>
+                </div>
+
+                <div class="logout" onclick="logout()" style="padding-top: 2em;text-align: center;">
+                    <button class="logoutBtn ui blue basic button">
+                        <i class="power icon"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- get the logged in user  -->
+<script>
+
+    document.title = "User | Home";
+
+
+    handleRoute();
+    handleDashRoute();
+
+
+    profile = $.param({
+
+        user: window.sessionStorage.ilemsliu,
+    })
+
+
+    // alert(profile);
+
+    $.post('server/getProfile.php', profile, (data) => {
+
+        // alert(data);
+        let profile = JSON.parse(data);
+
+        // console.log(profile);
+
+        $('.pname').html(profile.name);
+        $('.pphone').html(profile.phone);
+        $('.pemail').html(profile.email);
+        $('.ptown').html(profile.town);
+        $('.pidNo').html(profile.idNo);
+        $('.pdob').html(profile.dob);
+
+
+    })
+
+
+
+    function handleDashRoute() {
+        // get current the route 
+        let currentroute = window.location.href;
+
+        let currentResourceArr = currentroute.split('/');
+
+        let currentResource = currentResourceArr[currentResourceArr.length - 1];
+
+        if (currentResource == '') {
+
+            currentResource = 'home'
+
+            $('.breadcrumps').html('<a href="">Home</a>')
+
+        }
+
+        // alert(currentResource);
+
+
+        switch (currentResource) {
+
+            case 'home':
+
+                $('.mainDashCol').load('views/home.html');
+
+                break;
+
+            case 'new-case':
+
+                $('.mainDashCol').load('views/new.html');
+
+                break;
+
+            case 'my-cases':
+
+                $('.mainDashCol').load('views/my-cases.html');
+
+                break;
+
+            case 'case-studies':
+
+                $('.mainDashCol').load('views/case-studies.html');
+
+                break;
+
+
+            default:
+
+                if (currentResource.includes('case?c')) {
+
+                    $('.mainDashCol').load('views/my-case.html');
+
+                }
+                break;
+        }
+
+    }
+
+
+
+    function logout() {
+
+
+        if (confirm('Do you want to log out from this device?') == true) {
+
+            // remove the session storage 
+            window.sessionStorage.removeItem('ilemsliu');
+
+
+            window.location.reload();
+        }
+
+
+
+    }
+
+</script>

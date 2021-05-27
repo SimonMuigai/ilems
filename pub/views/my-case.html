@@ -1,0 +1,91 @@
+<div class="ui grid">
+    <div class="sixteen wide column" style="border-bottom: 1px solid rgb(199, 199, 199);">
+        <h4>
+            My Case
+        </h4>
+    </div>
+
+    <div class="sixteen wide column">
+
+
+
+        <div class="name" style="font-size: large;">
+
+        </div>
+        <br>
+
+        <div class="title" style="font-size: large;">
+
+        </div>
+
+
+        <br>
+        <div class="obNo" style="font-size: large;">
+
+        </div>
+
+
+        <br>
+        <div class="addedOn" style="font-size: large;">
+
+        </div>
+
+        <br>
+
+        <div class="statement" style="font-size: large;">
+
+        </div>
+
+        <br>
+        <br>
+        <div class="">
+            <button class="ui button orange basic">
+                Edit 
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+
+    let caseId = getEntityId('c');
+
+    caseId = $.param({
+        caseId: caseId
+    })
+
+    
+
+    $.post('server/getMyCase.php', caseId, (data) => {
+
+        // alert(data);
+        let myCase = JSON.parse(data);
+
+        // console.log(myCase);
+        // htmls
+
+        $('.name').html("Name: <i> <b>" + myCase.name + "<b></i>");
+
+
+        $('.title').html("Case Title: <i> <b>" + myCase.title + "<b></i>");
+
+        $('.obNo').html("OB No: <i> <b>" + myCase.obNo + "<b></i>");
+
+        $('.addedOn').html("Added On: <i> <b>" + myCase.added + "<b></i>");
+
+        $('.statement').html("Statement:  <br></br> <i> <b>" + myCase.statement + "<b></i>");
+
+
+    })
+
+
+    function getEntityId(name) {
+
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.search);
+
+        return (results !== null) ? results[1] || 0 : false;
+
+    }
+</script>

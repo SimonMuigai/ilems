@@ -1,20 +1,16 @@
 <?php
-
 // require connection
 require 'connect.php';
-
-date_default_timezone_set('Africa/Nairobi');
 
 //result object
 $resObj = new stdClass();
 
 // echo 'success';
-$username = $_POST['username'];
+$email = $_POST['email'];
 $password = $_POST['password'];
 
-
 //check userExist
-$checkExists = "SELECT * FROM admins WHERE username='$username'";
+$checkExists = "SELECT * FROM public WHERE email='$email'";
 
 // query
 $checkExistsQuery = mysqli_query($con, $checkExists);
@@ -24,7 +20,7 @@ if ($row = mysqli_fetch_assoc($checkExistsQuery)) {
     //exists
     $resObj->exists = true;
     // userid
-    $resObj->adminId = $row['adminId'];
+    $resObj->userId = $row['userId'];
 
     // stored password
     $hashedPass = $row['password'];
@@ -33,41 +29,20 @@ if ($row = mysqli_fetch_assoc($checkExistsQuery)) {
         // they match
         $resObj->login = true;
 
-        // set the cookie 
-        setcookie('ilems_lia', $resObj->adminId, time() + getTimeDifferenceBetweenNowAndMidnight(), "/");
+        $resObj->message="User Login Successfull";
 
-        // add session 
     } else {
         // they dont match
         $resObj->login = false;
 
-        $resObj->message="Incorect Username Or Password";
+        $resObj->message = "Incorrect Email Or Password";
     }
 } else {
     //no such admin
     $resObj->exists = false;
 
-    $resObj->message="The Admin Does Not Exist";
-
+    $resObj->message = "The user does not exist";
 }
 
 //encode to json and echo the json
 echo json_encode($resObj);
-
-
-function getTimeDifferenceBetweenNowAndMidnight()
-{
-
-    $now = time();
-
-    // get the time of ooo 
-    $today = date('Y-m-d', time());
-
-    $midnight = $today . " 23:59:00";
-
-    $midnight = strtotime($midnight);
-
-    return intval(($midnight - $now));
-}
-
-

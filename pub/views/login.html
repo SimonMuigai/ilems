@@ -1,0 +1,118 @@
+<div class="ui centered grid" style="background: rgb(80, 54, 80);height: 103vh;">
+    <div class="re sixteen wide column">
+
+    </div>
+    <div class="yello sixteen wide column" style="height: 10vh;">
+
+    </div>
+    <div class="brow five wide column">
+        <div class="ui segment" style="max-width: 90%;margin: auto;">
+            <div class="mainComponent ui grid">
+
+                <div class="sixteen wide column" style="text-align: center;padding-top: 2em;">
+
+                    <h3> <i class="users icon"></i> USER LOGIN</h3>
+                </div>
+                <div class="sixteen wide column">
+                    <form class="ui form" id="userLoginForm">
+                        <div class="field">
+                            <label>
+                                Email
+                            </label>
+                            <input type="email" name="email" id="email" placeholder="username"
+                                style="line-height:2em;background: rgb(226, 226, 226);border-radius: 5px;">
+                        </div>
+
+                        <div class="field">
+                            <label>
+                                Password
+                            </label>
+                            <input type="password" name="password" id="password" placeholder="password"
+                                style="line-height:2em;background: rgb(226, 226, 226);border-radius: 5px;">
+                        </div>
+
+
+                        <div class="field" style="padding-top: 2em;text-align: center;">
+                            <button class="userLoginStbBtn ui basic purple  button">
+                                <i class="lock icon"></i> Login
+                            </button>
+                        </div>
+
+
+                        <div class="three fields">
+                            <div class="field" style="padding-top: 1em;text-align: center;">
+                                <b>
+                                    <a href="../" style="color: rgb(66, 14, 66);"> <i class="home icon"></i> Home </a>
+                                </b>
+                            </div>
+
+                            <div class="field" style="padding-top: 1em;text-align: center;">
+                                <b>
+                                    <a href="forgot" style="color: rgb(66, 14, 66);">Forgot Password ?</a>
+                                </b>
+                            </div>
+
+                            <div class="field" style="padding-top: 1em;text-align: center;">
+                                <b>
+                                    <a href="register" style="color: rgb(66, 14, 66);">Register Here</a>
+                                </b>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="yello sixteen wide column" style="height: 20vh;">
+
+    </div>
+</div>
+
+<script>
+
+    // when login is submitted 
+    // when login form is submitted 
+    $('#userLoginForm').submit((e) => {
+
+        e.preventDefault();
+
+
+        let userData = $('#userLoginForm').serialize();
+
+
+        $('.userLoginStbBtn').addClass('loading');
+
+        $.post('server/login.php', userData, (data) => {
+
+            // alert(data);
+
+            console.log(data);
+
+            let res = JSON.parse(data);
+
+            if (res.login == true) {
+
+                // set session storage
+                window.sessionStorage.ilemsliu = res.userId;
+
+                // 
+                alert('User Login Successfull');
+
+                // 
+                // window.location.reload();
+
+            } else {
+
+                alert(res.message);
+            }
+
+            $('.userLoginStbBtn').removeClass('loading');
+
+        })
+
+
+    })
+
+</script>

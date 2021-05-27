@@ -1,0 +1,68 @@
+<div class="ui grid">
+    <div class="re sixteen wide column" style="border-bottom: 1px solid rgb(199, 199, 199);">
+        <h4>
+            New Case
+        </h4>
+    </div>
+
+    <div class="ten wide column">
+        <div class="">
+
+            <form class="ui form" id="newCaseForm">
+                <input type="hidden" name="user" id="user">
+
+                <div class="field">
+                    <label>Title</label>
+                    <input type="text" name="title" id="title" required>
+                </div>
+
+                <div class="field">
+
+                    <label>
+                        Case Statement
+                    </label>
+
+                    <textarea name="statement" id="statement" cols="30" rows="10" placeholder="statement"
+                        required></textarea>
+                </div>
+
+                <div class="field" style="padding-top: 2em;text-align: center;">
+                    <button class="addCaseBtn ui purple basic button">
+                        <i class="add icon"></i> Add Case
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+
+    $('#newCaseForm').submit((e) => {
+
+        e.preventDefault();
+
+        // add the user 
+        let user = window.sessionStorage.ilemsliu;
+
+        document.getElementById('user').value = user;
+
+
+        let newCase = $('#newCaseForm').serialize();
+
+        $('.addCaseBtn').addClass('loading');
+
+        $.post('server/addCase.php', newCase, (data) => {
+
+            alert(data);
+
+            $('.addCaseBtn').removeClass('loading');
+
+            $('#newCaseForm').trigger('reset');
+        })
+
+
+    })
+</script>

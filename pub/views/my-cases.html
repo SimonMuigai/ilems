@@ -1,0 +1,99 @@
+<div class="ui grid">
+    <div class="re sixteen wide column" style="border-bottom: 1px solid rgb(199, 199, 199);">
+        <h4>
+            My Cases
+        </h4>
+    </div>
+
+    <div class="sixteen wide column">
+        <div class="">
+
+            <table class="ui basic striped table">
+                <thead>
+                    <tr>
+                        <th>
+                            No
+                        </th>
+                        <th>
+                            OB No
+                        </th>
+
+                        <th>
+                            Added
+                        </th>
+
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            View
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody class="casesList">
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+
+    profile = $.param({
+
+        user: window.sessionStorage.ilemsliu,
+    })
+
+
+    $.post('server/getMyCases.php', profile, (data) => {
+
+        // console.log(data);
+        let myCases = JSON.parse(data);
+
+
+        // 
+
+        let counter = 0;
+
+        $('.casesList').empty();
+
+        for (let i = 0; i < myCases.length; i++) {
+
+            // append the rows on the tbody
+            $('.casesList').append('<tr class="cases_row' + i + '"/>');
+
+            // css
+            $('.cases_row' + i).css({ cursor: 'pointer' });
+
+            // create the holder var
+            let colData = "";
+
+            // create the for in vars
+            let dataKey;
+
+            // for in loop for the columns
+            for (dataKey in myCases[i]) {
+
+                // append the columns
+                $('.cases_row' + i).append('<td class="cases_col' + counter + '"/>');
+
+
+                // put the data in the colums
+                $('.cases_col' + counter).html(myCases[i][dataKey]);
+
+                // increment the data
+                counter++;
+            }
+
+        }
+    })
+</script>
