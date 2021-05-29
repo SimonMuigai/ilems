@@ -70,6 +70,12 @@ function handleRoute() {
 
             break;
 
+        case 'reports':
+
+            $('.mainCol').load('views/reports.html');
+
+            break;
+
         default:
 
             if (currentResource.includes('station?s=')) {
@@ -95,6 +101,14 @@ function handleRoute() {
                 $('.mainCol').load('views/assignment.html');
 
             }
+
+            if (currentResource.includes('lawyer?l=')) {
+
+                $('.mainCol').load('views/lawyer.html');
+
+            }
+
+
             break;
     }
 

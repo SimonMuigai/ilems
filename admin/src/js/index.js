@@ -28,6 +28,6 @@ function logout() {
 
     if (confirm('Logout?') == true) {
 
-        alert('yyyye');
+        alert('');
     }
 }
