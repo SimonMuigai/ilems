@@ -5,12 +5,51 @@
 <div class="ui grid" style="margin-top: 10px; background: rgb(241, 241, 241);">
     <div class="sixteen wide column" style="border-bottom: 1px solid rgb(202, 202, 202);">
         <h4>
-            Lawyers
+            Assignment
         </h4>
     </div>
 
 
     <div class="eleven wide column" style="border-right: 1px solid rgb(202, 202, 202);">
+
+        <div class="ui grid">
+            <div class="sixteen wide column">
+                <div class="">
+                    <b>
+                        OB Number
+                    </b>
+                </div>
+
+                <div class="obNumber" style="font-weight: bold;">
+
+                </div>
+            </div>
+
+            <div class="sixteen wide column">
+                <div class="">
+                    <b>
+                        Officers
+                    </b>
+                </div>
+
+                <div class="officers" style="font-weight: bold;">
+
+                </div>
+            </div>
+
+
+            <div class="sixteen wide column">
+                <div class="">
+                    <b>
+                        Lawyers
+                    </b>
+                </div>
+
+                <div class="lawyers" style="font-weight: bold;">
+
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -89,5 +128,34 @@
 
     })
 
+
+    // get assignment details 
+
+    let assignment = $.param({
+
+        aid: getEntityId('a'),
+    })
+
+    // get assignment details 
+    $.post('server/getAssignmentDetails.php', assignment, (data) => {
+
+        // alert(data)
+        let assign = JSON.parse(data);
+
+        // htmls 
+        $('.obNumber').html(assign.obNo);
+
+        $('.officers').html(assign.officers);
+    })
+
+
+
+    function getEntityId(name) {
+
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.search);
+
+        return (results !== null) ? results[1] || 0 : false;
+
+    }
 
 </script>

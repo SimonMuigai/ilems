@@ -1,0 +1,261 @@
+<style>
+
+</style>
+
+<div class="ui grid" style="margin-top: 10px; background: rgb(241, 241, 241);">
+    <div class="sixteen wide column" style="border-bottom: 1px solid rgb(202, 202, 202);">
+        <h4>
+            Case Assignments
+        </h4>
+    </div>
+
+
+    <div class="thirteen wide column" style="border-right: 1px solid rgb(202, 202, 202);">
+        <div class="ui grid">
+            <div class="re four wide column" style="border-right: 1px solid rgb(202, 202, 202);">
+                <div class="" style="background: rgba(255, 166, 0, 0.26);padding: 1em;">
+                    <div class="">
+                        <h4>
+                            Assign Cases
+                        </h4>
+                    </div>
+
+                    <hr>
+                    <div class="">
+                        <form class="ui form" id="assignCaseForm">
+                            <div class="field">
+                                <label>
+                                    OB No
+                                </label>
+                                <select name="obNo" id="obNo" required>
+                                    <option value="">Select Case</option>
+                                </select>
+
+                            </div>
+
+
+                            <div class="field">
+                                <label>
+                                    Case Officer
+                                </label>
+
+                                <select name="officer" id="officer" required>
+                                    <option value="">Select Officer</option>
+                                </select>
+                            </div>
+
+                            <div class="field" style="padding-top: 2em;text-align: center;">
+                                <button class="assignBtn ui orange basic button">
+                                    <i class="exchange icon"></i> Assign Cases
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <div class="twelve wide column">
+                <div class="" style="padding: 1em;">
+
+                    <table class="ui basic striped table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>obNo</th>
+                                <th>Officers</th>
+                                <th>Lawyers</th>
+                                <th>View</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="assignmentsList">
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="three wide column">
+        <div class="profileContainer">
+            <div class="avator"
+                style="width: 10em;height: 10em;margin: auto;background: rgba(0, 0, 255, 0);border-radius: 50%;overflow: hidden;">
+                <img src="../assets/images/51f6fb256629fc755b8870c801092942.png" alt="avator" width="100%"
+                    height="100%">
+            </div>
+
+            <div class="" style="padding: 1em;">
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Name: <span class="pname">
+
+                    </span>
+                </div>
+
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Username: <span class="pname">
+
+                    </span>
+                </div>
+
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Phone: <span class="pphone">
+
+                    </span>
+                </div>
+
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Email: <span class="pemail">
+
+                    </span>
+                </div>
+
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Status: <span class="pstatus">
+
+                    </span>
+                </div>
+
+
+
+                <div class="logout" onclick="logout()" style="padding-top: 2em;text-align: center;">
+                    <button class="logoutBtn ui blue basic button">
+                        <i class="power icon"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    // alert(profile);
+
+    $.post('server/getProfile.php', (data) => {
+
+        // alert(data);
+        let profile = JSON.parse(data);
+
+        // console.log(profile);
+
+        $('.pname').html(profile.name);
+        $('.pphone').html(profile.phone);
+        $('.pemail').html(profile.email);
+        $('.ptown').html(profile.town);
+        $('.pstatus').html(profile.status);
+
+    })
+
+
+    // when assign case form is submitted 
+    $('#assignCaseForm').submit((e) => {
+
+        e.preventDefault();
+
+        let a = $('#assignCaseForm').serialize();
+
+        $('.assignBtn').addClass('loading');
+
+        $.post('server/assignCase.php', a, (data) => {
+
+            alert(data);
+
+            $('.assignBtn').addClass('loading');
+
+            window.location.reload();
+
+        })
+
+    })
+
+
+    getCaseAssignmentsData();
+
+    function getCaseAssignmentsData() {
+
+        $.post('server/getCaseAssignmentsData.php', (data) => {
+
+            // console.log(data);
+            let assignData = JSON.parse(data);
+
+            for (let x = 0; x < assignData.cases.length; x++) {
+
+                $('#obNo').append("<option value='" + assignData.cases[x] + "'>" + assignData.cases[x] + "</option>");
+
+            }
+
+
+            for (let i = 0; i < assignData.police.length; i++) {
+
+                $('#officer').append("<option value='" + assignData.police[i] + "'>" + assignData.police[i] + "</option>");
+
+            }
+        })
+    }
+
+
+
+    getAssignments();
+
+    function getAssignments() {
+
+
+        $.post('server/getAssignments.php', (data) => {
+
+            // console.log(data);
+
+            let assignments = JSON.parse(data);
+
+
+            let counter = 0;
+
+            $('.assignmentsList').empty();
+
+            for (let i = 0; i < assignments.length; i++) {
+
+                // append the rows on the tbody
+                $('.assignmentsList').append('<tr class="ass_row' + i + '"/>');
+
+                // css
+                $('.ass_row' + i).css({ cursor: 'pointer' });
+
+                // create the holder var
+                let colData = "";
+
+                // create the for in vars
+                let dataKey;
+
+                // for in loop for the columns
+                for (dataKey in assignments[i]) {
+
+                    // append the columns
+                    $('.ass_row' + i).append('<td class="ass_col' + counter + '"/>');
+
+
+                    // put the data in the colums
+                    $('.ass_col' + counter).html(assignments[i][dataKey]);
+
+                    // increment the data
+                    counter++;
+                }
+
+            }
+
+
+        })
+    }
+
+
+
+</script>

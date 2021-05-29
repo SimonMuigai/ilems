@@ -1,0 +1,291 @@
+<style>
+
+</style>
+
+<div class="ui grid" style="margin-top: 10px; background: rgb(241, 241, 241);">
+    <div class="sixteen wide column" style="border-bottom: 1px solid rgb(202, 202, 202);">
+        <h4>
+            Police Stations
+        </h4>
+    </div>
+
+
+    <div class="twelve wide column" style="border-right: 1px solid rgb(202, 202, 202);">
+
+        <div class="ui grid">
+            <div class="re five wide column" style="border-right: 1px solid rgb(202, 202, 202);">
+                <div class="" style="background: rgba(207, 96, 96, 0.568);padding: 1em;">
+                    <div class="">
+                        <h5>
+                            Add Station
+                        </h5>
+                    </div>
+
+                    <div class="div">
+                        <form class="ui form" id="addStationForm">
+                            <div class="field">
+                                <label>
+                                    Name
+                                </label>
+                                <input type="text" name="name" id="name" required>
+                            </div>
+
+                            <div class="field">
+                                <label>
+                                    Location
+                                </label>
+
+                                <input type="text" name="location" id="location" required>
+                            </div>
+
+                            <div class="field">
+                                <label>
+                                    County
+                                </label>
+                                <select name="county" id="county" required>
+                                    <option value="">Select County</option>
+
+                                    <option value='Baringo'>Baringo</option>
+                                    <option value='Bomet'>Bomet</option>
+                                    <option value='Bungoma'>Bungoma</option>
+                                    <option value='Busia'>Busia</option>
+                                    <option value='Elgeyo Marakwet'>Elgeyo-Marakwet</option>
+                                    <option value='Embu'>Embu</option>
+                                    <option value='Garissa'>Garissa</option>
+                                    <option value='Homa Bay'>Homa Bay</option>
+                                    <option value='Isiolo'>Isiolo</option>
+                                    <option value='Kajiado'>Kajiado</option>
+                                    <option value='Kakamega'>Kakamega</option>
+                                    <option value='Kericho'>Kericho</option>
+                                    <option value='Kiambu'>Kiambu</option>
+                                    <option value='Kilifi'>Kilifi</option>
+                                    <option value='Kirinyaga'>Kirinyaga</option>
+                                    <option value='Kisii'>Kisii</option>
+                                    <option value='Kisumu'>Kisumu</option>
+                                    <option value='Kitui'>Kitui</option>
+                                    <option value='Kwale'>Kwale</option>
+                                    <option value='Laikipia'>Laikipia</option>
+                                    <option value='Lamu'>Lamu</option>
+                                    <option value='Machakos'>Machakos</option>
+                                    <option value='Makueni'>Makueni</option>
+                                    <option value='Mandera'>Mandera</option>
+                                    <option value='Marsabit'>Marsabit</option>
+                                    <option value='Meru'>Meru</option>
+                                    <option value='Migori'>Migori</option>
+                                    <option value='Mombasa'>Mombasa</option>
+                                    <option value="Murang'a">Murang'a</option>
+                                    <option value='Nairobi'>Nairobi City</option>
+                                    <option value='Nakuru'>Nakuru</option>
+                                    <option value='Nandi'>Nandi</option>
+                                    <option value='Narok'>Narok</option>
+                                    <option value='Nyamira'>Nyamira</option>
+                                    <option value='Nyandarua'>Nyandarua</option>
+                                    <option value='Nyeri'>Nyeri</option>
+                                    <option value='Samburu'>Samburu</option>
+                                    <option value='Siaya'>Siaya</option>
+                                    <option value='Taita-Taveta'>Taita-Taveta</option>
+                                    <option value='Tana River'>Tana River</option>
+                                    <option value='Tharaka-Nithi'>Tharaka-Nithi</option>
+                                    <option value='Trans Nzoia'>Trans Nzoia</option>
+                                    <option value='Turkana'>Turkana</option>
+                                    <option value='Uasin Gishu'>Uasin Gishu</option>
+                                    <option value='Vihiga'>Vihiga</option>
+                                    <option value='West Pokot'>West Pokot</option>
+                                    <option value='wajir'>wajir</option>
+
+                                </select>
+
+
+                            </div>
+
+
+                            <div class="field">
+                                <label>
+                                    Phone
+                                </label>
+
+                                <input type="tel" name="phone" id="phone">
+                            </div>
+
+
+                            <div class="field" style="padding-top: 1em;text-align: center;">
+                                <button class="addStationBtn ui blue basic button">
+                                    <i class="plus icon"></i> Add Station
+                                </button>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="eleven wide column">
+                <div>
+                    <table class="ui striped basic table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Code</th>
+                                <th>County</th>
+                                <th>Location</th>
+                                <th>View</th>
+                            </tr>
+                        </thead>
+                        <tbody class="stationsList">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="four wide column">
+        <div class="profileContainer">
+            <div class="avator"
+                style="width: 10em;height: 10em;margin: auto;background: rgba(0, 0, 255, 0);border-radius: 50%;overflow: hidden;">
+                <img src="../assets/images/51f6fb256629fc755b8870c801092942.png" alt="avator" width="100%"
+                    height="100%">
+            </div>
+
+            <div class="" style="padding: 1em;">
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Name: <span class="pname">
+
+                    </span>
+                </div>
+
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Username: <span class="pname">
+
+                    </span>
+                </div>
+
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Phone: <span class="pphone">
+
+                    </span>
+                </div>
+
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Email: <span class="pemail">
+
+                    </span>
+                </div>
+
+                <div class="profileName"
+                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
+                    Status: <span class="pstatus">
+
+                    </span>
+                </div>
+
+
+
+                <div class="logout" onclick="logout()" style="padding-top: 2em;text-align: center;">
+                    <button class="logoutBtn ui blue basic button">
+                        <i class="power icon"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    // alert(profile);
+
+    $.post('server/getProfile.php', (data) => {
+
+        // alert(data);
+        let profile = JSON.parse(data);
+
+        // console.log(profile);
+
+        $('.pname').html(profile.name);
+        $('.pphone').html(profile.phone);
+        $('.pemail').html(profile.email);
+        $('.ptown').html(profile.town);
+        $('.pstatus').html(profile.status);
+
+    })
+
+
+    // add sttion form
+    $('#addStationForm').submit((e) => {
+
+        e.preventDefault();
+        let newStation = $('#addStationForm').serialize();
+
+        $('.addStationBtn').addClass('loading');
+
+        $.post('server/addStation.php', newStation, (data) => {
+
+            alert(data);
+
+            $('.addStationBtn').removeClass('loading');
+
+
+            $('#addStationForm').trigger('reset');
+
+            getStations();
+        })
+
+    })
+
+
+    getStations();
+
+
+    function getStations() {
+
+        $.post('server/getStations.php', (data) => {
+
+            let stations = JSON.parse(data);
+
+            // console.log(data);
+
+            let counter = 0;
+
+            $('.stationsList').empty();
+
+            for (let i = 0; i < stations.length; i++) {
+
+                // append the rows on the tbody
+                $('.stationsList').append('<tr class="stations_row' + i + '"/>');
+
+                // css
+                $('.stations_row' + i).css({ cursor: 'pointer' });
+
+                // create the holder var
+                let colData = "";
+
+                // create the for in vars
+                let dataKey;
+
+                // for in loop for the columns
+                for (dataKey in stations[i]) {
+
+                    // append the columns
+                    $('.stations_row' + i).append('<td class="stations_col' + counter + '"/>');
+
+
+                    // put the data in the colums
+                    $('.stations_col' + counter).html(stations[i][dataKey]);
+
+                    // increment the data
+                    counter++;
+                }
+
+            }
+        })
+
+    }
+</script>

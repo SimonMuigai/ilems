@@ -5,13 +5,46 @@
 <div class="ui grid" style="margin-top: 10px; background: rgb(241, 241, 241);">
     <div class="sixteen wide column" style="border-bottom: 1px solid rgb(202, 202, 202);">
         <h4>
-            Lawyers
+            Station
         </h4>
     </div>
 
 
     <div class="eleven wide column" style="border-right: 1px solid rgb(202, 202, 202);">
 
+        <div class="ui grid">
+            <div class="sixteen wide column">
+                <div style="padding-top: .5em;font-size: 16px;">
+                    <span class="sname">fghjkl</span>
+                </div>
+
+                <div style="padding-top: .5em;font-size: 16px;">
+                    <span class="code"></span>
+                </div>
+
+
+                <div style="padding-top: .5em;font-size: 16px;">
+                    <span class="county"></span>
+                </div>
+
+                <div style="padding-top: .5em;font-size: 16px;">
+                    <span class="location"></span>
+                </div>
+
+                <div style="padding-top: .5em;font-size: 16px;">
+                    <span class="phone"></span>
+                </div>
+
+
+                <div class="" style="padding-top: 2em;text-align: center;">
+
+                    <button class="deleteStation ui red button">
+                        <i class="trash icon"></i> Delete
+                    </button>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <div class="five wide column">
@@ -89,5 +122,59 @@
 
     })
 
+
+    let station = $.param({
+        sid: getEntityId('s')
+    })
+
+
+    $.post('server/getStation.php', station, (data) => {
+
+        // alert(data);
+        let station = JSON.parse(data);
+
+        // htmls 
+        $('.sname').html("Station Name: " + station.name);
+
+        $('.code').html("Sattion Code: " + station.code);
+
+        $('.county').html("Station Location: " + station.location);
+
+        $('.name').html("Station County: " + station.county);
+
+        $('.phone').html("Station Phone: " + station.phone);
+
+
+    })
+
+
+    // when delete is clicked
+    $('.deleteStation').click(() => {
+
+        if (confirm('Delete This Station?') == true) {
+
+            $('.deleteStation').addClass('loading');
+
+            $.post('server/deleteStation.php', station, (data) => {
+
+                alert(data);
+
+                $('.deleteStation').addClass('loading');
+
+
+                window.history.back();
+
+            })
+        }
+    })
+
+
+    function getEntityId(name) {
+
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.search);
+
+        return (results !== null) ? results[1] || 0 : false;
+
+    }
 
 </script>

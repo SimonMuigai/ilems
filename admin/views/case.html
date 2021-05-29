@@ -5,13 +5,59 @@
 <div class="ui grid" style="margin-top: 10px; background: rgb(241, 241, 241);">
     <div class="sixteen wide column" style="border-bottom: 1px solid rgb(202, 202, 202);">
         <h4>
-            Lawyers
+            Case
         </h4>
     </div>
 
 
     <div class="eleven wide column" style="border-right: 1px solid rgb(202, 202, 202);">
 
+        <div class="ui grid">
+            <div class="sixteen wide column">
+
+
+
+                <div class="name" style="font-size: large;">
+
+                </div>
+                <br>
+
+                <div class="title" style="font-size: large;">
+
+                </div>
+
+
+                <br>
+                <div class="obNo" style="font-size: large;">
+
+                </div>
+
+
+                <br>
+                <div class="addedOn" style="font-size: large;">
+
+                </div>
+                <br>
+                <div class="status" style="font-size: large;">
+
+                </div>
+                <br>
+
+                <div class="statement" style="font-size: large;">
+
+                </div>
+
+                <br>
+            </div>
+
+
+            <div class="sixteen wide column" style="text-align: center;padding-top: 2em;">
+                <button class="closeCaseButton ui red button">
+                    <i class="x icon"></i> Close
+                </button>
+
+            </div>
+        </div>
     </div>
 
     <div class="five wide column">
@@ -89,5 +135,70 @@
 
     })
 
+
+    let caseId = getEntityId('c');
+
+    caseId = $.param({
+        caseId: caseId
+    })
+
+
+
+    $.post('server/getCase.php', caseId, (data) => {
+
+        // alert(data);
+        let myCase = JSON.parse(data);
+
+        // console.log(myCase);
+        // htmls
+
+        if (myCase.status == 'Closed') {
+            $('.closeCaseButton').prop('disabled', true);
+        }
+
+        $('.name').html("Name: <i> <b>" + myCase.name + "<b></i>");
+
+
+        $('.title').html("Case Title: <i> <b>" + myCase.title + "<b></i>");
+
+        $('.obNo').html("OB No: <i> <b>" + myCase.obNo + "<b></i>");
+
+        $('.addedOn').html("Added On: <i> <b>" + myCase.added + "<b></i>");
+
+        $('.status').html("Status: <i> <b>" + myCase.status + "<b></i>");
+
+
+        $('.statement').html("Statement:  <br></br> <i> <b>" + myCase.statement + "<b></i>");
+
+
+    })
+
+
+    // when close case is clicked 
+    $('.closeCaseButton').click(() => {
+
+        if (confirm('Close This Case? This Action Cannot Be Reversed') == true) {
+
+            $('.closeCaseButton').addClass('loading');
+
+            $.post('server/closeCase.php', caseId, (data) => {
+
+                alert(data);
+
+                window.location.reload();
+            })
+
+        }
+
+    })
+
+
+    function getEntityId(name) {
+
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.search);
+
+        return (results !== null) ? results[1] || 0 : false;
+
+    }
 
 </script>
