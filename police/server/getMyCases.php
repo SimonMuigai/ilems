@@ -4,7 +4,7 @@ require 'connect.php';
 
 $police = $_POST['police'];
 
-$sel = "SELECT * FROM cases WHERE policeId='$police'";
+$sel = "SELECT * FROM cases";
 
 $selQuery = mysqli_query($con, $sel);
 

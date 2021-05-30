@@ -10,7 +10,7 @@ $res = new stdClass();
 
 
 // get details 
-$sel = "SELECT * FROM public WHERE policeId='$policeId'";
+$sel = "SELECT * FROM police WHERE policeId='$policeId'";
 
 $selQuery = mysqli_query($con, $sel);
 
@@ -18,18 +18,13 @@ if ($u = mysqli_fetch_assoc($selQuery)) {
 
     $res->exists = true;
 
-    $res->name = $u['fullname'];
+    $res->name = $u['name'];
 
     $res->phone = $u['phone'];
 
     $res->email = $u['email'];
 
-    $res->town = $u['town'];
-
-    $res->dob = $u['dob'];
-
-    $res->idNo = $u['idNo'];
-
+    $res->workId = $u['workId'];
 
     $res->contributions = [];
 } else {

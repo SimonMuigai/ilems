@@ -1,7 +1,7 @@
 // check if logged in 
 function checkIfLoggedIn() {
 
-    let loggedIn = window.sessionStorage.ilemsliu;
+    let loggedIn = window.sessionStorage.ilemslip;
 
     if (loggedIn == undefined) {
         return false;

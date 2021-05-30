@@ -25,39 +25,15 @@
     }
 </style>
 
-
-<div class="ui grid">
-
-    <div class="yello sixteen wide column" style="border-bottom: 1px solid rgb(204, 204, 204);">
+<div class="ui grid" style="margin-top: 10px; background: rgb(241, 241, 241);">
+    <div class="sixteen wide column" style="border-bottom: 1px solid rgb(202, 202, 202);">
         <h4>
-            Quick Actions
+            Reports
         </h4>
-
-        <hr>
-
-        <div class="">
-            <a href="new-case">
-
-                <button class="green basic mini ui button">New Case</button>
-            </a>
-
-            <a href="">
-                <button class="teal basic ui mini button">Latest Case</button>
-            </a>
-
-            <a href="profile">
-                <button class="ui olive basic mini button">Profile</button>
-            </a>
-
-            <a href="my-cases">
-                <button class="ui red basic mini button">My Cases</button>
-            </a>
-
-        </div>
     </div>
 
 
-    <div class="sixteen wide column">
+    <div class="sixteen wide column" style="border-right: 1px solid rgb(202, 202, 202);">
         <div class="ui grid">
 
             <div class="sixteen wide column">
@@ -255,6 +231,8 @@
                                             Public
                                         </div>
 
+
+
                                     </div>
 
                                 </div>
@@ -270,3 +248,46 @@
 
 
 </div>
+
+<script>
+
+    // alert(profile);
+
+    $.post('server/getProfile.php', (data) => {
+
+        // alert(data);
+        let profile = JSON.parse(data);
+
+        // console.log(profile);
+
+        $('.pname').html(profile.name);
+        $('.pphone').html(profile.phone);
+        $('.pemail').html(profile.email);
+        $('.ptown').html(profile.town);
+        $('.pstatus').html(profile.status);
+
+    })
+
+
+    // get home page stats 
+    $.post('server/getStats.php', (data) => {
+
+        let stats = JSON.parse(data);
+
+        // htmls 
+
+        $('.totalStations').html(stats.stations);
+
+        $('.totalStations').html(stats.stations);
+        $('.totalAssignments').html(stats.assignments);
+        $('.totalCases').html(stats.cases);
+        $('.totalPolice').html(stats.police);
+        $('.totalLawyers').html(stats.lawyers);
+        $('.totalUsers').html(stats.totalUsers);
+        $('.totalPublic').html(stats.public);
+
+
+    })
+
+
+</script>

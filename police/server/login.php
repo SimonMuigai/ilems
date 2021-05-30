@@ -10,7 +10,7 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 
 //check policeExist
-$checkExists = "SELECT * FROM public WHERE email='$email'";
+$checkExists = "SELECT * FROM police WHERE email='$email'";
 
 // query
 $checkExistsQuery = mysqli_query($con, $checkExists);
@@ -25,7 +25,9 @@ if ($row = mysqli_fetch_assoc($checkExistsQuery)) {
     // stored password
     $hashedPass = $row['password'];
     //verify pass
-    if (password_verify($password, $hashedPass)) {
+
+
+    if ($password==$hashedPass) {
         // they match
         $resObj->login = true;
 

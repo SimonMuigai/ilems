@@ -30,7 +30,7 @@
 
         <div class=" mainNav">
             <div class="nav">
-                <a href="" style="color: aliceblue;">
+                <a href="home" style="color: aliceblue;">
                     <i class="home icon"></i> Home
                 </a>
             </div>
@@ -110,24 +110,12 @@
 
                 <div class="profileName"
                     style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
-                    Town: <span class="ptown">
+                    WorkId: <span class="ptown">
 
                     </span>
                 </div>
 
-                <div class="profileName"
-                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
-                    D.O.B: <span class="pdob">
 
-                    </span>
-                </div>
-
-                <div class="profileName"
-                    style="font-weight: 600;padding-top: 1em;border-bottom: 1px solid rgb(204, 204, 204);padding-bottom: 5px;">
-                    Id No: <span class="pidNo">
-
-                    </span>
-                </div>
 
                 <div class="logout" onclick="logout()" style="padding-top: 2em;text-align: center;">
                     <button class="logoutBtn ui blue basic button">
@@ -151,7 +139,7 @@
 
     profile = $.param({
 
-        police: window.sessionStorage.ilemsliu,
+        police: window.sessionStorage.ilemslip,
     })
 
 
@@ -167,9 +155,8 @@
         $('.pname').html(profile.name);
         $('.pphone').html(profile.phone);
         $('.pemail').html(profile.email);
-        $('.ptown').html(profile.town);
-        $('.pidNo').html(profile.idNo);
-        $('.pdob').html(profile.dob);
+        $('.ptown').html(profile.workId);
+
 
 
     })
@@ -221,6 +208,13 @@
 
                 break;
 
+            case 'reports':
+
+                $('.mainDashCol').load('views/reports.html');
+
+                break;
+
+
 
             default:
 
@@ -242,7 +236,7 @@
         if (confirm('Do you want to log out from this device?') == true) {
 
             // remove the session storage 
-            window.sessionStorage.removeItem('ilemsliu');
+            window.sessionStorage.removeItem('ilemslip');
 
 
             window.location.reload();
