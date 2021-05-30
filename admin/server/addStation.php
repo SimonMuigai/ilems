@@ -2,14 +2,15 @@
 
 require 'connect.php';
 
-$name = $_POST['name'];
+$name =addslashes( $_POST['name']);
 
-$county = $_POST['county'];
+$county = addslashes($_POST['county']);
+
+
 
 $location = $_POST['location'];
 
 $phone = $_POST['phone'];
-
 
 // 
 $code = substr(str_shuffle('1234567890ASDFGHJKLQWERTYUIOPZXCVBNM'), 0, 5);

@@ -28,6 +28,11 @@ function logout() {
 
     if (confirm('Logout?') == true) {
 
-        alert('');
+        $.post('server/logout.php',(data)=>{
+
+            alert(data);
+
+            window.location.reload();
+        })
     }
 }

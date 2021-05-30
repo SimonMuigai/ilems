@@ -11,11 +11,10 @@ function handleRoute() {
 
 
 
+    // alert(currentResource);
 
 
     switch (currentResource) {
-
-
 
         case 'register':
 
@@ -28,7 +27,6 @@ function handleRoute() {
             if (currentResource.includes('user?u=')) {
 
                 $('.mainCol').load('views/user.view.html');
-
             }
             break;
     }
